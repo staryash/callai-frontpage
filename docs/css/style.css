@@ -46,6 +46,7 @@ iframe {
   overflow-y: hidden;
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
+
 }
 iframe::-webkit-scrollbar {
   display: none;
@@ -227,6 +228,5 @@ iframe::-webkit-scrollbar {
 (min-resolution: 192dpi) {
   body{
     font-size: 13px;
-
   }
 }
