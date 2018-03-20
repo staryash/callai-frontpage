@@ -42,7 +42,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#working">How it works</a></li>
             <!--<li><a href="#review">Review</a></li>-->
-            <li><a href="#features">Features</a></li>
+            <!--<li><a href="#features">Features</a></li>-->
             <li><a href="#about">About us</a></li>
             <li><a href="#contact">Contact us</a></li>
         </ul>
@@ -52,6 +52,7 @@
 
 <!--Intro-->
 <section>
+    <!--<img style="width: 100%; z-index: -9; position: static;"  src="resources/bg_image/Main_BG.svg">-->
     <div class="intro-section parent-section">
         <div class="intro-head" style="margin-top: 6em;">
             <h3 style="font-size: 2.69em;">Human-in-loop voice assistant for your support calls.</h3>
@@ -64,7 +65,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="into-content-2 col-lg-5 col-md-5" style="margin-top: 4em;">
+            <div class="into-content-2 col-lg-5 col-md-5" style="margin-top: 6em;">
                 <div style="font-size: 1.5em; font-weight: 300; width: 80%; margin: 1.1em auto; float: right; text-align: left">
                     We are building Lisa - artificially intelligent bot that speaks for your business.
                     She can be tailored to your business needs very easily.
@@ -77,8 +78,8 @@
             </div>
             <div class="col-lg-7 col-md-7">
                 <div class="demobox" style="background: #FFFFFF;box-shadow: 0 2px 20px 2px rgba(0,0,0,0.17);
-                border-radius: 8px; width: 90%; height: 400px; float: right;">
-                    <iframe width="100%" height="100%" src="https://abc.voice.devsupport.ai/">
+                border-radius: 8px; width: 90%; height: 33em; float: right; margin-top: 4em;">
+                    <iframe scrolling="no" width="100%" height="100%" src="https://abc.voice.devsupport.ai#headline">
                     </iframe>
                 </div>
 
@@ -91,7 +92,7 @@
 
 <!--customer section-->
 <section>
-    <div class="customer-section parent-section" style="text-align: center; color: #393939;">
+    <div class="customer-section parent-section" style="text-align: center; color: #393939; padding-top: 0;">
         <h4>Customers</h4>
         <span style="font-size: 1.69em; font-weight: 500">Industry leaders in banking, finance, & payments domain trust Callup AI.</span>
         <div class="row" style="margin-top: 2em; margin-bottom: 7.6em;">
@@ -126,7 +127,7 @@
 
 <!--how section-->
 <section>
-    <div class="how-section parent-section"
+    <div id="working" class="how-section parent-section"
          style="text-align: center; background: #000B2A; color: white; padding-bottom: 6.06em;">
         <h4>How it works</h4>
         <div class="how-img-container" style="padding-top: 2.5em; padding-bottom: 7em;">
@@ -161,7 +162,7 @@
     </div>
 </section>
 <section>
-    <div class="about-section parent-section" style="text-align: center; color: #393939; padding-bottom: 5.125em;">
+    <div id="about" class="about-section parent-section" style="text-align: center; color: #393939; padding-bottom: 5.125em;">
         <h4>About Us</h4>
         <div class="about-content-wrapper" style="width: 83%; margin-left: auto; margin-right: auto; margin-bottom: 6.3em;">
         <span class="about-content" style="font-size: 1.69em; line-height: 1em; font-weight: 500;">Arjun topped the AI course in BITS Pilani. Ex Amazon employee, Arjun shows up in top
@@ -170,15 +171,27 @@
             public companies and tech companies.
         </span>
         </div>
-        <div class="contact-container">
+        <div id="contact" class="contact-container">
         <h4 style="margin-bottom: 0.5em;">Get in Touch</h4><!--special-->
         <span style="font-size: 1.69em">Write us at <b>sales@callup.ai</b></span>
         </div>
     </div>
 </section>
 <section>
-    <div class="footer-section">
-
+    <div class="footer-section parent-section" style="background-color: #010A29; color: white; padding-top: 1em; padding-bottom: 1em;">
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <img style="width: 54%" src="resources/Logo.svg">
+    </div>
+    <div class="col-lg-3 col-lg-offset-6 col-md-6">
+        <div style="float: right; margin-top: 0.5em">
+            <ul class="list-unstyled" style="font-size: 1em; font-weight: bold;">
+                <li>sales&#8203@devsupport.ai</li>
+                <!--<li>+91 9837012345</li>-->
+            </ul>
+        </div>
+    </div>
+</div>
     </div>
 </section>
 
@@ -193,6 +206,17 @@
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
 <script>
+    //slow scroll
+    //  slow scroll
+    $('a[href^="#"]').click(function(){
+
+      var the_id = $(this).attr("href");
+
+      $('html, body').animate({
+        scrollTop:$(the_id).offset().top -50
+      }, 'slow');
+    });
+
   //for navigation bar
   $(window).scroll(function () {
     var scroll = $(window).scrollTop();

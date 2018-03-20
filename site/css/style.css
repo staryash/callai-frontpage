@@ -44,6 +44,11 @@ iframe {
   border-radius: 8px;
   border: rgba(192,0,14,0);
   overflow-y: hidden;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+iframe::-webkit-scrollbar {
+  display: none;
 }
 
 /*1. Navigation section*/
@@ -131,8 +136,17 @@ iframe {
 /*2. Intro section*/
 .intro-section{
   text-align: center;
-  background: #010A29;
-  color: white
+  /*background: #010A29;*/
+  color: white;
+  background-image: url(../resources/bg_image/Main_BG.svg);
+  background-repeat:no-repeat;
+  background-position: center;
+  /*background-size: 100%;*/
+  padding-bottom: 10.8em;
+  margin-left: 0px;
+  /*background-size: contain;*/
+  background-size: cover;
+  /*background-size: 100% 100%;*/
 }
 
 /*3. Demo box*/
