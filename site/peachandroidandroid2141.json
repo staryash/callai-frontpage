@@ -1,0 +1,570 @@
+{
+  "name": "PeachPay Android Integration",
+  "variables": [
+    {
+      "name": "serverurl",
+      "label": "Url pointing to your txn generating URL",
+      "description": "In order to proceed, you need to complete server integration first",
+      "help": "Example: https://mywebsite.com/new_txn.php",
+      "stage": 1
+    },
+    {
+      "name": "orgname",
+      "label": "Write your company name without spaces",
+      "description": "Your company name would be used for callback url. Make sure its the same you entered in the server script",
+      "help": "Example: devsupport",
+      "stage": 1
+    }
+  ],
+  "variableValidations": [
+    {
+      "validationType": "http",
+      "errorLabel": "Server is not properly configured at the given url",
+      "params": {
+        "url": "{{=it.serverurl}}",
+        "method": "GET",
+        "headers": {},
+        "body": {}
+      },
+      "expectations": [
+        {
+          "field": "$.status",
+          "value": "200",
+          "operator": "eq"
+        }
+      ],
+      "stage": 1
+    },
+    {
+      "validationType": "http",
+      "errorLabel": "Company name doesn't matches with PHP",
+      "params": {
+        "url": "{{=it.serverurl}}",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "data": "action=validateOrgname"
+      },
+      "expectations": [
+        {
+          "field": "$.data.orgname",
+          "value": "{{=it.orgname}}",
+          "operator": "eq"
+        }
+      ],
+      "stage": 1
+    }
+  ],
+  "changes": [
+    {
+      "name": "Add import compile 'com.android.supportappcompat-v7",
+      "fileSelector": ".+build.gradle$",
+      "fileType": "gradle",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "\ncompile 'com.android.support:appcompat-v7:25.3.1'",
+          "action": "append",
+          "query": "compile 'com.android.support",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "compile 'com.android.supportappcompat-v7"
+            },
+            {
+              "checkType": "positive",
+              "query": "compile 'com.android.support"
+            }
+          ]
+        }
+      ],
+      "validations": [
+        {
+          "checkType": "positive",
+          "query": "apply plugin: 'com.android.application'"
+        }
+      ]
+    },
+    {
+      "name": "Add import compile 'com.android.supportdesign",
+      "fileSelector": ".+build.gradle$",
+      "fileType": "gradle",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "\ncompile 'com.android.support:design:25.3.1'",
+          "action": "append",
+          "query": "compile 'com.android.support",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "compile 'com.android.supportdesign"
+            },
+            {
+              "checkType": "positive",
+              "query": "compile 'com.android.support"
+            }
+          ]
+        }
+      ],
+      "validations": [
+        {
+          "checkType": "positive",
+          "query": "apply plugin: 'com.android.application'"
+        }
+      ]
+    },
+    {
+      "name": "Add import compile 'com.google.android.gmsplay-services-wallet",
+      "fileSelector": ".+build.gradle$",
+      "fileType": "gradle",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "\ncompile 'com.google.android.gms:play-services-wallet:11.0.2' ",
+          "action": "append",
+          "query": "compile 'com.android.support",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "compile 'com.google.android.gmsplay-services-wallet"
+            },
+            {
+              "checkType": "positive",
+              "query": "compile 'com.android.support"
+            }
+          ]
+        }
+      ],
+      "validations": [
+        {
+          "checkType": "positive",
+          "query": "apply plugin: 'com.android.application'"
+        }
+      ]
+    },
+    {
+      "name": "Add import compile 'com.squareup.okhttp3okhttp",
+      "fileSelector": ".+build.gradle$",
+      "fileType": "gradle",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "\ncompile 'com.squareup.okhttp3:okhttp:3.9.0'",
+          "action": "append",
+          "query": "compile 'com.android.support",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "compile 'com.squareup.okhttp3okhttp"
+            },
+            {
+              "checkType": "positive",
+              "query": "compile 'com.android.support"
+            }
+          ]
+        }
+      ],
+      "validations": [
+        {
+          "checkType": "positive",
+          "query": "apply plugin: 'com.android.application'"
+        }
+      ]
+    },
+    {
+      "name": "Add oppwa project to settings.gradle",
+      "fileSelector": "settings.gradle$",
+      "fileType": "gradle",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": ", ':oppwa.mobile-2.14.1'",
+          "action": "appendInline",
+          "query": "include ':app'",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": ", ':oppwa.mobile-2.14.1'"
+            }
+          ]
+        }
+      ],
+      "validations": [
+        {
+          "checkType": "positive",
+          "query": "include ':app'"
+        }
+      ]
+    },
+    {
+      "name": "Add to AndroidManifest.xml service: com.oppwa.mobile.connect.service.ConnectService",
+      "fileSelector": ".+main[\\\\/]AndroidManifest.xml",
+      "changeType": "fileEdit",
+      "fileType": "xml",
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "<service android:name=\"com.oppwa.mobile.connect.service.ConnectService\" android:exported=\"false\"/>",
+          "action": "prepend",
+          "query": "</application>"
+        }
+      ],
+      "validations": {
+        "checkType": "negative",
+        "query": "com.oppwa.mobile.connect.service.ConnectService"
+      }
+    },
+    {
+      "name": "Add import compile project('oppwa.mobile-2.14.1')",
+      "fileSelector": ".+build.gradle$",
+      "fileType": "gradle",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "\ncompile project(':oppwa.mobile-2.14.1')",
+          "action": "append",
+          "query": "compile 'com.android.support",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "compile project('oppwa.mobile-2.14.1')"
+            },
+            {
+              "checkType": "positive",
+              "query": "compile 'com.android.support"
+            }
+          ]
+        }
+      ],
+      "validations": [
+        {
+          "checkType": "positive",
+          "query": "apply plugin: 'com.android.application'"
+        }
+      ]
+    },
+    {
+      "name": "Add to AndroidManifest.xml: peachpay.PeachPay, peachpay.PeachCallback and checkoutActiviy",
+      "fileSelector": ".+main[\\\\/]AndroidManifest.xml",
+      "fileType": "xml",
+      "changeType": "fileEdit",
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "    <activity\n            android:name=\"com.oppwa.mobile.connect.checkout.dialog.CheckoutActivity\"\n            android:exported=\"false\"\n            android:launchMode=\"singleTop\"\n            android:theme=\"@style/Theme.Checkout.Light\"\n            android:windowSoftInputMode=\"adjustPan\"\n            />\n        <activity android:name=\"peachpay.PeachPay\" />\n        <activity\n            android:name=\"peachpay.PeachCallback\"\n            android:launchMode=\"singleTask\">\n            <intent-filter>\n                <data android:scheme=\"{{=it.orgname}}\" />\n                <action android:name=\"android.intent.action.VIEW\" />\n\n                <category android:name=\"android.intent.category.DEFAULT\" />\n                <category android:name=\"android.intent.category.BROWSABLE\" />\n            </intent-filter>\n        </activity>",
+          "action": "prepend",
+          "query": "</application>"
+        }
+      ],
+      "validations": [
+        {
+          "checkType": "negative",
+          "query": "peachpay.PeachPay"
+        }
+      ]
+    },
+    {
+      "name": "Add to AndroidManifest.xml service: peachpay.CheckoutBroadcastReceiver",
+      "fileSelector": ".+main[\\\\/]AndroidManifest.xml",
+      "changeType": "fileEdit",
+      "fileType": "xml",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "<receiver android:name=\"peachpay.CheckoutBroadcastReceiver\" android:exported=\"false\"><intent-filter> <action android:name=\"com.oppwa.mobile.connect.checkout.ACTION_PAYMENT_METHOD_SELECTED\" /></intent-filter> </receiver>",
+          "action": "prepend",
+          "query": "</application>"
+        }
+      ],
+      "validations": {
+        "checkType": "negative",
+        "query": "peachpay.CheckoutBroadcastReceiver"
+      }
+    },
+    {
+      "name": "Add import org.json.JSONException;",
+      "fileSelector": ".+Activity.java",
+      "fileType": "java",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "import org.json.JSONException;",
+          "action": "append",
+          "query": "import",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "org.json.JSONException;"
+            }
+          ]
+        }
+      ],
+      "validations": []
+    },
+    {
+      "name": "Add to AndroidManifest.xml activity: server.url.peachpay",
+      "fileSelector": ".+main[\\\\/]AndroidManifest.xml",
+      "changeType": "fileEdit",
+      "stage": 2,
+      "fileType": "xml",
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "<meta-data android:name=\"server.url.peachpay\" android:value=\"{{=it.serverurl}}\" />\n    <meta-data android:name=\"peachpay.callback.name\" android:value=\"{{=it.orgname}}\"/>",
+          "action": "prepend",
+          "query": "</application>"
+        }
+      ],
+      "validations": {
+        "checkType": "negative",
+        "query": "server.url.peachpay"
+      }
+    },
+    {
+      "name": "Add to internet permission to manifest",
+      "fileSelector": ".+main[\\\\/]AndroidManifest.xml",
+      "changeType": "fileEdit",
+      "stage": 2,
+      "fileType": "xml",
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "<uses-permission android:name=\"android.permission.INTERNET\" />\n",
+          "action": "prepend",
+          "query": "<application"
+        }
+      ],
+      "validations": {
+        "checkType": "negative",
+        "query": "server.url.peachpay"
+      }
+    },
+    {
+      "name": "PeachPayment SDK",
+      "fileSelector": ".+build.gradle$",
+      "changeType": "fileAdd",
+      "help": "Bot injects peach payment code in these files.",
+      "stage": 2,
+      "fileType": "download",
+      "change": [
+        {
+          "changeType": "file.download",
+          "action": "unzip",
+          "url": "https://github.com/devsupport-ai/peachv2/archive/master.zip",
+          "unzip": [
+            {
+              "source": "peachv2-master/app/src/main/java/peachpay/",
+              "target": "/app/src/main/java/peachpay"
+            },
+            {
+              "source": "peachv2-master/app/src/main/res/layout/peach_pay.xml",
+              "target": "/app/src/main/res/layout/"
+            },
+            {
+              "source": "peachv2-master/app/src/main/res/layout/activity_peach_callback.xml",
+              "target": "/app/src/main/res/layout/"
+            },
+            {
+              "source": "peachv2-master/oppwa.mobile-2.14.1/",
+              "target": "/oppwa.mobile-2.14.1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Add import org.json.JSONObject;",
+      "fileSelector": ".+Activity.java",
+      "fileType": "java",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "import org.json.JSONObject;",
+          "action": "append",
+          "query": "import",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "org.json.JSONObject;"
+            }
+          ]
+        }
+      ],
+      "validations": []
+    },
+    {
+      "name": "Add import peachpay.Config;",
+      "fileSelector": ".+Activity.java",
+      "fileType": "java",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "import peachpay.Config;",
+          "action": "append",
+          "query": "import",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "peachpay.Config;"
+            }
+          ]
+        }
+      ],
+      "validations": []
+    },
+    {
+      "name": "Add import peachpay.Peach;import",
+      "fileSelector": ".+Activity.java",
+      "fileType": "java",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "import peachpay.Peach;\nimport peachpay.PeachListener;",
+          "action": "append",
+          "query": "import",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "import peachpay.Peach;"
+            }
+          ]
+        }
+      ],
+      "validations": []
+    },
+    {
+      "name": "Add import android.content.IntentFilter;",
+      "fileSelector": ".+Activity.java",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "fileType": "java",
+      "change": [
+        {
+          "changeType": "add.line",
+          "action": "append",
+          "query": "import",
+          "line": "import android.content.IntentFilter;",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "android.content.IntentFilter;"
+            }
+          ]
+        }
+      ],
+      "validations": []
+    },
+    {
+      "name": "Add import android.app.Activity;",
+      "fileSelector": ".+Activity.java",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "fileType": "java",
+      "change": [
+        {
+          "changeType": "add.line",
+          "action": "append",
+          "query": "import",
+          "line": "import android.app.Activity;",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "android.app.Activity;"
+            }
+          ]
+        }
+      ],
+      "validations": []
+    },
+    {
+      "name": "Add import android.widget.Toast;",
+      "fileSelector": ".+Activity.java",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "fileType": "java",
+      "change": [
+        {
+          "changeType": "add.line",
+          "action": "append",
+          "query": "import",
+          "line": "import android.widget.Toast;",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "android.widget.Toast;"
+            }
+          ]
+        }
+      ],
+      "validations": []
+    },
+    {
+      "name": "Add method to Activity: private void callPeachPayments",
+      "fileSelector": ".+Activity.java",
+      "fileType": "java",
+      "changeType": "fileEdit",
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "    PeachListener peachListener;\n\n    Peach peachPay;\n\n    private void callPeachPayments(String amount, String currency, String type, String env) {\n        final Activity activity = this;\n\n        JSONObject pay = new JSONObject();\n        try {\n            pay.put(\"amount\", amount);\n            pay.put(\"currency\", currency);\n            pay.put(\"type\", type);\n            pay.put(\"savecard\", Config.PROMPT);\n            pay.put(\"recurring\", false);\n            pay.put(\"env\", env);\n        } catch (JSONException e) {\n            e.printStackTrace();\n        }\n\n        initListener();\n        peachPay = new Peach(pay, activity, peachListener);\n        IntentFilter filter = new IntentFilter(\"ai.devsupport.peachpay\");\n        registerReceiver(peachPay, filter);\n        peachPay.start();\n    }\n\n    private void initListener() {\n        peachListener = new PeachListener() {\n            @Override\n            public void onSuccess(String response) {\n                Toast.makeText(getApplicationContext(), \"Success:\" + response, Toast.LENGTH_LONG)\n                        .show();\n            }\n\n            @Override\n            public void onFailure(int code, String reason) {\n                Toast.makeText(getApplicationContext(), \"Failed Reason:\" + reason, Toast.LENGTH_LONG)\n                        .show();\n            }\n        };\n    }\n\n    @Override\n    protected void onDestroy() {\n        super.onDestroy();\n        unregisterReceiver(peachPay);\n    }",
+          "action": "append",
+          "query": "{",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "private void callPeachPayments"
+            }
+          ]
+        }
+      ],
+      "validations": [],
+      "stage": 3
+    },
+    {
+      "name": "After set view add line: callPeachPayments",
+      "fileSelector": ".+Activity.java",
+      "fileType": "java",
+      "changeType": "fileEdit",
+      "stage": 3,
+      "change": [
+        {
+          "changeType": "add.line",
+          "line": "    callPeachPayments(\"95.00\", \"EUR\", \"DB\", Config.TEST);\n        //calling this initiates payment, change \"DB\" to \"PA\" for changing payment type",
+          "action": "append",
+          "query": "setContentView",
+          "validations": [
+            {
+              "checkType": "negative",
+              "query": "//calling this initiates payment"
+            }
+          ]
+        }
+      ],
+      "validations": []
+    }
+  ],
+  "reviewResultContent": "<div>\n  <h3 class=\"devblue\" style=\"font-size: 16px; font-weight: 700\">Hey, your Android integration is\n    done!</h3>\n  <div class=\"ui divider\"></div>\n  <br>\n  <div class=\"devblue\" style=\"font-size: 16px;\">Here's what you need to do in your\n    <b>\n      mainActivity.java\n    </b>\n    <br>\n    <div style=\"margin-top: 0.5em; margin-bottom: 1em;\">\n      <b>callPeachPayments(amount, currency, payment_type, env);</b>\n    </div>\n  </div>\n</div>"
+}

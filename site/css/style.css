@@ -1,0 +1,91 @@
+/*
+0. Basic css
+1. Navigation section
+2. Intro section
+3. Demo box
+4. Customer section
+5. How it works
+6. About
+7. Footer
+*/
+
+/*0. Basic*/
+body{
+  font-family: Raleway, sans-serif;
+  font-size: 14px;
+}
+.parent-section{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 5.125em;
+}
+
+h4{
+  font-size: 2.25em;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0.7em;
+}
+
+/*1. Navigation section*/
+
+/*2. Intro section*/
+.intro-section{
+  text-align: center;
+  background: #010A29;
+  color: white
+}
+
+/*3. Demo box*/
+
+/*4. Customer section*/
+.logo-container{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.logo{
+  width: 93.5%;
+  border: 1px solid #979797;
+  /*border-radius: 1px;*/
+}
+
+/*5. How it works*/
+.featicard{
+  margin: 1em auto;
+  width: 93%;
+  padding-top: 2.9em;
+  padding-bottom: 4.5em;
+  border-radius: 3px;
+  background: #00081E;
+}
+.featicons-container{
+  padding-right: 20%;
+  padding-left: 20%;
+}
+.featicons{
+  width: 100%;
+}
+.feati-content{
+  font-size: 1.5em;
+  margin-left: 6%;
+  margin-right: 6%;
+  font-weight: 600;
+}
+
+/*6. About*/
+
+/*7. Footer*/
+
+
+/*media queries for desktop*/
+@media (min-width: 767px) {
+
+  body{
+    font-size: 16px;
+  }
+
+  .parent-section{
+    padding-left: 14.05%;
+    padding-right: 14.05%;
+  }
+}
