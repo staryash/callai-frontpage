@@ -180,10 +180,12 @@ iframe::-webkit-scrollbar {
 }
 .feati-content{
   font-size: 1.3em;
-  margin-left: 12%;
-  margin-right: 12%;
+  margin-left: 4%;
+  margin-right: 4%;
   font-weight: 600;
 }
+
+
 
 /*6. About*/
 
@@ -213,6 +215,11 @@ iframe::-webkit-scrollbar {
     padding-left: 14.05%;
     padding-right: 14.05%;
   }
+  .feati-content{
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+
 }
 
 @media
