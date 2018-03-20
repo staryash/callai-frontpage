@@ -173,7 +173,7 @@
         </div>
         <div id="contact" class="contact-container">
         <h4 style="margin-bottom: 0.5em;">Get in Touch</h4><!--special-->
-        <span style="font-size: 1.69em">Write us at <b>sales@callup.ai</b></span>
+        <span style="font-size: 1.69em; cursor: pointer;" onclick="sendemail()">Write us at <b>sales@callup.ai</b></span>
         </div>
     </div>
 </section>
@@ -227,5 +227,11 @@
       $('.navbar-default').removeClass('nav-white');
     }
   });
+
+  //send email
+    function sendemail () {
+//    console.log("email:", email);
+      window.open("mailto:sales@callup.ai?subject=interested call.ai&body=Hi %0A I would like to know more about the product.%0A");
+    }
 </script>
 </body>
