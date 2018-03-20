@@ -214,3 +214,12 @@ iframe::-webkit-scrollbar {
     padding-right: 14.05%;
   }
 }
+
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  body{
+    font-size: 12px;
+
+  }
+}
