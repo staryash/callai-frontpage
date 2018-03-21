@@ -138,17 +138,18 @@ iframe::-webkit-scrollbar {
 /*2. Intro section*/
 .intro-section{
   text-align: center;
-  /*background: #010A29;*/
+  background: #010A29;
   color: white;
-  background-image: url(../resources/bg_image/Main_BG.svg);
-  background-repeat:no-repeat;
-  background-position: center;
+  /*background-image: url(../resources/bg_image/Main_BG.svg);*/
+  /*background-repeat:no-repeat;*/
+  /*background-position: center;*/
+  /*background-size: cover;*/
+
   /*background-size: 100%;*/
-  padding-bottom: 10.8em;
+  padding-bottom: 8em;
   margin-left: 0px;
   /*background-size: contain;*/
-  background-size: cover;
-  /*background-size: 100% 100%;*/
+  background-size: 0%;
 }
 
 /*3. Demo box*/
@@ -168,7 +169,7 @@ iframe::-webkit-scrollbar {
 .featicard{
   margin: 1em auto;
   width: 93%;
-  padding-top: 2.9em;
+  padding-top: 4em;
   padding-bottom: 4.5em;
   border-radius: 3px;
   background: #00081E;
